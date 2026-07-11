@@ -55,7 +55,7 @@ export default defineConfig({
 					type: "image/png",
 				},
 			],
-			start_url: "/",
+			start_url: "/my-blog",
 			background_color: "#1d1f21",
 			theme_color: "#2bbc8a",
 			display: "standalone",
