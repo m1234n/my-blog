@@ -1,0 +1,35 @@
+name: Deploy to GitHub Pages
+
+on:
+  # 每次向 main 分支推送代码时触发。如果你的主分支叫 master，请修改此处
+  push:
+    branches: [ main ]
+  # 允许在 GitHub Actions 页面上手动触发构建
+  workflow_dispatch:
+
+# 允许此任务克隆仓库并创建 Pages 部署
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v7 # 最新文档已升级至 v7
+
+      - name: Install, build, and upload your site
+        uses: withastro/action@v6 # 官方维护的最新核心 Action 版本 v6
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5 # 部署插件升级至 v5
