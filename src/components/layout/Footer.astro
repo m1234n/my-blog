@@ -1,5 +1,6 @@
 ---
 import { menuLinks, siteConfig } from "@/site.config";
+import { withBase } from "@/utils/path";
 
 const year = new Date().getFullYear();
 ---
@@ -14,7 +15,7 @@ const year = new Date().getFullYear();
 	<nav aria-label="Footer" class="sm:divide-muted flex gap-x-2 sm:gap-x-0 sm:divide-x">
 		{
 			menuLinks.map((link) => (
-				<a class="hover:text-global-text px-4 py-2 hover:underline sm:py-0" href={link.path}>
+				<a class="hover:text-global-text px-4 py-2 hover:underline sm:py-0" href={withBase(link.path)}>
 					{link.title}
 				</a>
 			))
